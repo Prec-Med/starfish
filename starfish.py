@@ -193,7 +193,8 @@ def rtg_intersect(lhs_label, lhs_vcf, rhs_label, rhs_vcf, args, debug=False):
         make_empty_vcf(rhs_and_lhs, rhs_vcf)
         copy_vcf(lhs_vcf, lhs_not_rhs)
         copy_vcf(rhs_vcf, rhs_not_lhs)
-    shutil.rmtree(tmp_dir)
+    if os.path.exists(tmp_dir):
+        shutil.rmtree(tmp_dir)
     return lhs_and_rhs, rhs_and_lhs, lhs_not_rhs, rhs_not_lhs
 
 def naive_common(vcfs, out, debug=False):
@@ -346,7 +347,8 @@ def main(args):
         for rhs_label, isecs in rhs_isecs.items():
             for isec in isecs:
                 if isec.exists():
-                    remove_vcf(isec)
+                    # remove_vcf(isec)
+                    pass
     for vcf in tmp_vcfs:
         remove_vcf(vcf)
     
